@@ -9,19 +9,19 @@ module "vpc" {
   cidr = var.vpc_cidr
   azs  = slice(data.aws_availability_zones.available.names, 0, 2)
 
-  private_subnets = ["172.17.1.0/16", "172.17.2.0/16"]
-  public_subnets  = ["172.17.3.0/16", "172.17.4.0/16"]
+  private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
+  public_subnets  = ["10.0.3.0/24", "10.0.4.0/24"]
 
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
 
   public_subnet_tags = {
-              Name   = "petclinic-public_subnets"
+    Name = "petclinic-public_subnets"
   }
 
   private_subnet_tags = {
-              Name   = "petclinic-private_subnets"
+    Name = "petclinic-private_subnets"
 
   }
 }

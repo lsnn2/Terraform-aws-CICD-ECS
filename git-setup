@@ -1,0 +1,37 @@
+Set up a local git repo for the petclinic application
+Start by switching to the petclinic directory:
+
+cd ../petclinic
+Set up your git username and email address:
+
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
+Now ceate a local git repo for petclinic as follows:
+
+git init
+git add .
+git commit -m "Baseline commit"
+Set up the remote CodeCommit repo
+An AWS CodeCommit repo was built as part of the pipeline you created. You will now set this up as a remote repo for your local petclinic repo.
+
+For authentication purposes, you can use the AWS IAM git credential helper to generate git credentials based on your IAM role permissions. Run:
+
+git config --global credential.helper '!aws codecommit credential-helper $@'
+git config --global credential.UseHttpPath true
+From the output of the Terraform build, note the Terraform output source_repo_clone_url_http.
+
+cd ../terraform
+export tf_source_repo_clone_url_http=$(terraform output source_repo_clone_url_http)
+Set this up as a remote for your git repo as follows:
+
+cd ../petclinic
+git remote add origin $tf_source_repo_clone_url_http
+git remote -v
+You should see something like:
+
+origin  https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/petclinic (fetch)
+origin  https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/petclinic (push)
+Trigger the pipeline
+To trigger the pipeline, push the master branch to the remote as follows:
+
+git push -u origin master

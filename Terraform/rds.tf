@@ -1,5 +1,5 @@
 module "db" {
-  source  = "terraform-aws-modules/rds/aws"
+  source = "terraform-aws-modules/rds/aws"
 
   identifier = "petclinic"
 
@@ -9,11 +9,11 @@ module "db" {
   allocated_storage = 5
   availability_zone = "${var.aws_region}a"
 
-  db_name  = var.db_name
-  username = var.db_user
-  password = data.aws_ssm_parameter.dbpassword.value
-  port     = "3306"
-  multi_az = false
+  db_name             = var.db_name
+  username            = var.db_user
+  password            = data.aws_ssm_parameter.dbpassword.value
+  port                = "3306"
+  multi_az            = false
   publicly_accessible = false
   skip_final_snapshot = true
 

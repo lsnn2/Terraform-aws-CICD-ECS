@@ -18,7 +18,7 @@ variable "stack" {
 
 variable "vpc_cidr" {
   description = "CIDR for the VPC"
-  default     = "172.17.0.0/16"
+  default     = "10.0.0.0/16"
 }
 
 variable "az_count" {
@@ -30,10 +30,10 @@ variable "aws_ecr" {
   description = "AWS ECR "
 }
 
- variable "container_image" {
+variable "container_image" {
   description = "Docker image to run in the ECS cluster"
   default     = "ibuchh/spring-petclinic-h2"
- }
+}
 
 variable "family" {
   description = "Family of the Task Definition"
@@ -62,12 +62,12 @@ variable "fargate_memory" {
 
 variable "fargate-task-service-role" {
   description = "Name of the stack."
-   default     = "petclinic"
+  default     = "petclinic"
 }
 
 variable "db_instance_type" {
   description = "RDS instance type"
-  default     = "db.m5d.large"
+  default     = "db.m5.large"
 }
 
 variable "db_name" {
@@ -107,21 +107,19 @@ variable "cw_log_stream" {
 # Source repo name and branch
 
 variable "source_repo_name" {
-    description = "Source repo name"
-    type = string
-    default = petclinic-repo
+  description = "Source repo name"
+  type        = string
 }
 
 variable "source_repo_branch" {
-    description = "Source repo branch"
-    type = string
+  description = "Source repo branch"
+  type        = string
 }
 
 
 # Image repo name for ECR
 
 variable "image_repo_name" {
-    description = "Image repo name"
-    type = string
-    petclinic = petclinic-image
+  description = "Image repo name"
+  type        = string
 }
